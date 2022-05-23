@@ -1,0 +1,201 @@
+body {
+  text-align: center;
+  background-color: rgb(207, 206, 206);
+}
+
+.title {
+  color: rgb(240, 105, 105);
+  font-size: 50px;
+}
+
+.tip {
+  background-color: white;
+  height: 30px;
+  width: 500px;
+  margin: 10px auto;
+  border-radius: 50px;
+  line-height: 30px;
+  font-size: 14px;
+  color: rgb(131, 211, 248);
+  opacity: 0;
+}
+
+.tip.show {
+  opacity: 1;
+}
+
+.list.away {
+  position: fixed;
+  left: 20%;
+  top: 200px;
+}
+
+.list .enter input {
+  background-color: white;
+  height: 50px;
+  width: 500px;
+  padding-inline: 10px;
+  color: rgb(0, 0, 0);
+  border: 0;
+  box-sizing: border-box;
+}
+
+.list ul {
+  width: 500px;
+  margin: 0 auto;
+  list-style: none;
+  background-color: white;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.list ul li {
+  height: 50px;
+  width: 500px;
+  text-align: left;
+  border-top: 1px rgb(207, 207, 207) solid;
+  padding-left: 10px;
+  line-height: 50px;
+  cursor: pointer;
+}
+
+.list ul li .dueSpan {
+  float: right;
+  margin-right: 18px;
+  font-size: 10px;
+}
+
+.list .footInfo {
+  height: 30px;
+  width: 500px;
+  font-size: 14px;
+  border-top: 1px rgb(207, 207, 207) solid;
+  background-color: white;
+  margin: 0 auto;
+  line-height: 30px;
+}
+
+.list .footInfo #leftTodo {
+  margin-left: 10px;
+  float: left;
+}
+
+.list .footInfo #clearTodo {
+  margin-right: 10px;
+  float: right;
+  cursor: pointer;
+}
+
+.footLayer p {
+  background-color: white;
+  margin: 0 auto;
+  height: 8px;
+  border-top: 1px rgb(207, 207, 207) solid;
+}
+
+.footLayer .layer1 {
+  width: 480px;
+}
+
+.footLayer .layer2 {
+  width: 460px;
+}
+
+.detail {
+  position: fixed;
+  right: 20%;
+  top: 200px;
+  height: 400px;
+  width: 500px;
+  background-color: white;
+  padding: 20px;
+  text-align: center;
+  display: none;
+}
+
+.detail.show {
+  display: block;
+}
+
+.detail .detailTitle {
+  width: 100%;
+  height: 40px;
+  border-radius: 15px;
+  border: 1px gray solid;
+  padding-left: 5px;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.detail .detailDescription {
+  width: 475px;
+  height: 200px;
+  margin: 10px 0;
+  padding: 15px;
+  border-radius: 15px;
+  border: 1px gray solid;
+  font-size: 18px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.detail .detailDue input {
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  line-height: 40px;
+  text-align: center;
+}
+
+.detail button {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 25px;
+  border: 1px black solid;
+  border-radius: 10px;
+}
+
+.detail #desert {
+  background-color: rgb(255, 173, 173);
+}
+
+.detail #back {
+  background-color: rgb(158, 245, 184);
+  margin-right: 40px;
+}
+
+.alertBox {
+  height: 200px;
+  width: 300px;
+  background-color: white;
+  padding: 1px;
+  border: 2px red solid;
+  border-radius: 20px;
+  display: none;
+  position: fixed;
+  left: 40%;
+  top: 35%
+}
+
+.alertBox.showAlert {
+  display: block;
+}
+
+.alertBox p {
+  font-size: 29px;
+  font-weight: bold;
+  color: red;
+}
+
+.alertBox #confirm {
+  background-color: rgb(255, 119, 115);
+  margin-right: 40px;
+}
+
+.alertBox #cancel {
+  background-color: rgb(68, 248, 68);
+}
+
+.alertBox button {
+  font-size: 25px;
+  border-radius: 10px;
+}

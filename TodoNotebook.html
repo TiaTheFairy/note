@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TTF Todo Notebook</title>
+
+  <script src="https://unpkg.com/vue@2.6.14/dist/vue.min.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+
+<body>
+  <div id="app">
+    <p class="title"> {{ title }} </p>
+
+    <div :class="isDetailShowing?'list away':'list'">
+      <div :class="isTip?'tip show':'tip'"> {{ tip }} </div>
+
+      <div class="enter">
+        <input v-model="input" @keyup.enter="add" type="text" autofocus="autofocus" autocomplete="off"
+          placeholder="Type item title to create">
+      </div>
+
+      <ul>
+        <li v-for="(item,index) in list" v-show="list.length>0" @click="showDetail(index)">
+          <span> {{ index+1 + '. ' + item.title }} </span>
+          <span class="dueSpan"> {{ 'due in ' + item.due + 'h' }} </span>
+        </li>
+      </ul>
+
+      <div class="footInfo">
+        <div id="leftTodo"> {{ list.length + left }} </div>
+        <div id="clearTodo" @click="clearTodo" v-show="list.length>0"> {{ clear }} </div>
+      </div>
+
+      <div class="footLayer">
+        <p class="layer1"></p>
+        <p class="layer2"></p>
+      </div>
+    </div>
+
+    <div :class="isDetailShowing?'detail show':'detail'" v-if="list.length>0">
+      <input class="detailTitle" type="text" v-model="list[detailIndex].title"><br>
+      <textarea class="detailDescription" type="text" v-model="list[detailIndex].description"></textarea>
+      <br>
+      <div class="detailDue">
+        <span> {{ detailDue }} </span>
+        <input type="text" v-model="list[0].due">
+        <span> {{ detailDue2 }} </span>
+      </div>
+      <button id="back" @click="closeDetail"> {{ back }} </button>
+      <button id="desert" @click="deleteTodo"> {{ desert }} </button>
+    </div>
+
+    <div :class="isAlert?'alertBox showAlert':'alertBox'">
+      <p> {{ alertMessage }} </p>
+      <button id="confirm" @click="confirmFromBox"> {{ confirm }} </button>
+      <button id="cancel" @click="cancelFromBox"> {{ cancel }} </button>
+    </div>
+
+    <script>
+      app = new Vue({
+        el: "#app",
+        data: {
+          title: 'Todo Notebook',
+          left: ' item(s) in queue',
+          clear: 'Clear all',
+
+          detailDescription: 'Detailed description of this item: ',
+          detailDue: 'This item will due in ',
+          detailDue2: 'hour(s).',
+          back: 'Back',
+          desert: 'Desert',
+
+          clearMessage: 'Are you sure to clear all item(s) ?',
+          deleteMessage: 'Are you sure to abondon this item ?',
+          alertMessage: '',
+          confirm: 'Confrim',
+          cancel: 'Cancel',
+
+          isDetailShowing: false,
+          detailIndex: 0,
+          isAlert: false,
+          alertType: 'clear',
+
+          tip: '',
+          isTip: '',
+
+          list: [],
+          input: ''
+        },
+        methods: {
+          add: function () {
+            if (this.input == '' || /^\s+$/.test(this.input)) {
+              return;
+            }
+            var tmpObj = {
+              title: this.input,
+              description: '',
+              due: 24,
+              check: false
+            };
+            this.list.push(tmpObj);
+            localStorage.setItem('lists', JSON.stringify(this.list));
+            this.tip = 'You just created an item. Tap it to edit';
+            this.isTip = true;
+            setTimeout(() => {
+              this.isTip = false;
+            }, 3000);
+          },
+          deleteTodo: function (index) {
+            this.alertType = 'delete';
+            this.alertMessage = this.deleteMessage;
+            this.isAlert = true;
+          },
+          clearTodo: function () {
+            this.alertType = 'clear';
+            this.alertMessage = this.clearMessage;
+            this.isAlert = true;
+          },
+          confirmFromBox: function () {
+            if (this.alertType == 'clear') {
+              this.list.splice(0, this.list.length);
+            } else {
+              this.list.splice(this.detailIndex, 1);
+            }
+            this.isDetailShowing = false;
+            this.isAlert = false;
+            localStorage.setItem('lists', JSON.stringify(this.list));
+            this.tip = 'Delete successfully.';
+            this.isTip = true;
+            setTimeout(() => {
+              this.isTip = false;
+            }, 3000);
+          },
+          cancelFromBox: function () {
+            this.isDetailShowing = false;
+            this.isAlert = false;
+          },
+          showDetail: function (index) {
+            this.isDetailShowing = true;
+            this.detailIndex = index;
+          },
+          closeDetail: function () {
+            this.isDetailShowing = false;
+            this.tip = 'Changes automatically saved (If any).';
+            this.isTip = true;
+            setTimeout(() => {
+              this.isTip = false;
+            }, 3000);
+          }
+        }
+      })
+
+      var stringFromLocalStorage = localStorage.getItem('lists');
+      if (!(stringFromLocalStorage === null)) {
+        app.list = JSON.parse(stringFromLocalStorage);
+      }
+    </script>
+  </div>
+
+</html>
