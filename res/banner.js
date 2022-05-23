@@ -4,11 +4,8 @@ function bannerclick(string){
         case 'homepage':
             url = 'http://homepage.' + url;
             break;
-        case 'git':
-            url = 'http://git.' + url;
-            break;
-        case 'blog':
-            url = 'http://blog.' + url;
+        case 'note':
+            url = 'http://note.' + url;
             break;
         case 'mc':
             url = 'http://game.' + url;
