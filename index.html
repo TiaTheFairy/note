@@ -9,8 +9,8 @@
 
   <script src="https://unpkg.com/vue@2.6.14/dist/vue.min.js"></script>
   <script type="text/javascript" src="./res/banner.js"></script>
-  <link rel="stylesheet" type="text/css" href="./style.css">
   <link rel="stylesheet" type="text/css" href="./res/banner.css">
+  <link rel="stylesheet" type="text/css" href="./style.css">
 </head>
 
 <body>
@@ -30,7 +30,7 @@
 
       <div class="enter">
         <input v-model="input" @keyup.enter="add" type="text" autofocus="autofocus" autocomplete="off"
-          placeholder="Type item title to create">
+          placeholder="Type item title and hit 'Enter' to create">
       </div>
 
       <ul>
@@ -114,7 +114,7 @@
             };
             this.list.push(tmpObj);
             localStorage.setItem('lists', JSON.stringify(this.list));
-            this.tip = 'You just created an item. Tap it to edit';
+            this.tip = 'Tip: You just created an item. Tap it to edit';
             this.isTip = true;
             setTimeout(() => {
               this.isTip = false;
@@ -139,7 +139,7 @@
             this.isDetailShowing = false;
             this.isAlert = false;
             localStorage.setItem('lists', JSON.stringify(this.list));
-            this.tip = 'Delete successfully.';
+            this.tip = 'Tip: Delete successfully.';
             this.isTip = true;
             setTimeout(() => {
               this.isTip = false;
