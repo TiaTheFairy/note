@@ -1,6 +1,6 @@
 .banner{
     position: fixed;
-    top:0px auto;
+    top:0px;
     width: 100%;
     background-color:rgba(197, 180, 103, 0.527);
     height: 50px;
